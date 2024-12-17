@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function SignupForm() {
-  const [formData, setFormData] = useState({ username: '', password: '', name: '' });
+  const [formData, setFormData] = useState({ email: '', password: '', name: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -23,7 +23,7 @@ export default function SignupForm() {
 
     if (res.ok) {
       setSuccess('Account created successfully! You can now login.');
-      setFormData({ username: '', password: '', name: '' });
+      setFormData({ email: '', password: '', name: '' });
     } else {
       const data = await res.json();
       setError(data.error || 'An error occurred');
@@ -35,6 +35,17 @@ export default function SignupForm() {
       <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
+          <label className="block text-gray-700">Email</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Choose a username"
+            className="w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
           <label className="block text-gray-700">Name</label>
           <input
             type="text"
@@ -42,17 +53,6 @@ export default function SignupForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter your name"
-            className="w-full px-3 py-2 border rounded"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Choose a username"
             className="w-full px-3 py-2 border rounded"
           />
         </div>

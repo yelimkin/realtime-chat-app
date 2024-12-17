@@ -3,20 +3,20 @@ import User from '../../../models/User';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, password, name } = req.body;
+    const { email, password, name } = req.body;
 
     // MongoDB 연결
     await connectToDatabase();
 
     try {
       // 중복 사용자 확인
-      const existingUser = await User.findOne({ username });
+      const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ error: 'Username already exists' });
       }
 
       // 새 사용자 생성
-      const newUser = await User.create({ username, password, name });
+      const newUser = await User.create({ email, password, name });
       return res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
       return res.status(500).json({ error: 'Internal Server Error' });

@@ -2,7 +2,7 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 export default function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -11,7 +11,7 @@ export default function LoginForm() {
     setError('');
 
     const result = await signIn('credentials', {
-      username,
+      email,
       password,
       redirect: false, // 로그인 후 리다이렉트를 비활성화
     });
@@ -28,11 +28,11 @@ export default function LoginForm() {
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-4">
-          <label className="block text-gray-700">Username</label>
+          <label className="block text-gray-700">Email</label>
           <input
             type="text"
-            placeholder="Enter your username"
-            value={username}
+            placeholder="Enter your email"
+            value={email}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full px-3 py-2 border rounded"
           />

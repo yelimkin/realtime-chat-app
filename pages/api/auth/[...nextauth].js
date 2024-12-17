@@ -12,7 +12,7 @@ export default NextAuth({
         await connectToDatabase();
 
         // 사용자 인증 로직
-        const user = await User.findOne({ username: credentials.username });
+        const user = await User.findOne({ email: credentials.email });
         if (user && user.password === credentials.password) { // 유효한 사용자라면 객체를 반환
           return { id: user._id, name: user.username }; // 세션 정보에 포함됨
         }
