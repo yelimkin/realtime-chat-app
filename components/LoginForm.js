@@ -33,7 +33,7 @@ export default function LoginForm() {
             type="text"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-3 py-2 border rounded"
           />
         </div>
